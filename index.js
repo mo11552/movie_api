@@ -6,16 +6,44 @@ const app = express();
 let topMovies = [
   {
     title: 'Harry Potter and the Sorcerer\'s Stone',
-    author: 'J.K. Rowling'
+    year: '2001'
   },
   {
-    title: 'Lord of the Rings',
-    author: 'J.R.R. Tolkien'
+    title: 'The GodFather',
+    year: '1972'
   },
   {
-    title: 'Twilight',
-    author: 'Stephanie Meyer'
-  }
+    title: 'Scarface',
+    year: '1983'
+  },
+  {
+    title: 'GoodFellas',
+    year: '1990'
+  },
+  {
+    title: 'Training Day',
+    year: '2001'
+  },
+  {
+    title: 'The Wood',
+    year: '1999'
+  },
+  {
+    title: 'The GodFather II',
+    year: '1974'
+  },
+  {
+    title: 'Rush Hour',
+    year: '1998'
+  },
+  {
+    title: 'Juice',
+    year: '1992'
+  },
+  {
+    title: 'Coming To America',
+    year: '1988'
+  },
 ];
 
 // GET requests
