@@ -47,13 +47,6 @@ let topMovies = [
 ];
 
 // GET requests
-app.get('/', (req, res) => {
-  res.send('My top ten movies');
-});
-
-app.get('/documentation', (req, res) => {                  
-  res.sendFile('public/documentation.html', { root: __dirname });
-});
 
 app.get('/movies', (req, res) => {
   res.json(topMovies);
@@ -66,7 +59,7 @@ app.use(express.static('public'));
 app.use(morgan('common'));
 
 app.get('/', (req, res) => {
-  res.send('Welcome to my app!');
+  res.send('My top ten movies');
 });
 
 app.get('/secreturl', (req, res) => {
