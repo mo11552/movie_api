@@ -46,14 +46,30 @@ let topMovies = [
   },
 ];
 
-// GET requests
-
+// READ
 app.get('/movies', (req, res) => {
-  res.json(topMovies);
+  res.status(200).json(topMovies);
+})
+
+// READ
+app.get('/movies/:title', (req, res) => {
+  const { title } = req.params;
+  const movie = movies.find( movie => movie.Title === title);
+
+  if (movie) {
+  	res.status(200).json(movie);
+  } else {
+  	res.status(400).send("no such movie")
+  }
 });
 
 // express.static
 app.use(express.static('public'));
+
+app.get('/documentation', (req, res) => {                  
+  console.log('Documentation Request');
+  res.sendFile('public/documentation.html', {root: __dirname});
+});
 
 // Morgan Middleware
 app.use(morgan('common'));
