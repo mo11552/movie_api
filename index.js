@@ -16,7 +16,7 @@ let topMovies = [
     	bio:'Chris Joseph Columbus is an American movie director, producer and screenwriter. His most successful movies are Harry Potter and the Philosophers Stone, Harry Potter and the Chamber of Secrets, Mrs. Doubtfire, and Home Alone.',
     	birth:'September 10, 1958'
     },
-    imageURL:''
+    imageURL:'images/Harry_Potter.jpeg'
   },
   {
     title: 'The GodFather',
@@ -30,7 +30,7 @@ let topMovies = [
     	bio: 'Franicis Ford Coppola is an American film director, producer, and screenwriter. He is considered one of the major figures of the New Hollywood filmmaking movement of the 1960s and 1970s.',
     	birth: 'April 7, 1939 '
     },
-    imageURL:
+    imageURL:'images/the_godfather.jpeg'
   },
   {
     title: 'Scarface',
@@ -44,7 +44,7 @@ let topMovies = [
     	bio: 'Brian Russell De Palma is an American film director and screenwriter. With a career spanning over 50 years, he is best known for his work in the suspense, crime and psychological thriller genres.',
     	birth: 'September 11, 1940'
     },
-    imageURL:
+    imageURL: 'images/scarface.jpeg'
   },
   {
     title: 'GoodFellas',
@@ -58,7 +58,7 @@ let topMovies = [
     	bio: 'Martin Charles Scorsese was born in Flushing, New York. Martin Scorsese is known for his gritty, meticulous filmmaking style and is widely considered one of the most important directors of all time. His passion for films started at a young age, as he was an 8 year old, pint sized filmmaker',
     	birth: 'November 17, 1942'
     },
-    imageURL:
+    imageURL: 'images/goodfellas.jpg'
   },
   {
     title: 'Training Day',
@@ -72,7 +72,7 @@ let topMovies = [
     	bio: 'Antoine Fuqua is an American filmmaker, known for his work in the action and thriller genres. He was originally known as a director of music videos, and made his film debut in 1998 with The Replacement Killers. His critical breakthrough was the 2001 crime thriller Training Day.',
     	birth: 'May 30, 1965'
     },
-    imageURL:
+    imageURL: 'images/training_day.jpg'
   },
   {
     title: 'The Wood',
@@ -86,7 +86,7 @@ let topMovies = [
     	bio: 'Rick Famuyiwa is an American filmmaker and television director. He is best known for the films The Wood, Brown Sugar, and Dope, as well for his work on the television series The Mandalorian.',
     	birth: 'June 18, 1973'
     },
-    imageURL:
+    imageURL: 'images/the_wood.jpeg'
   },
   {
     title: 'The GodFather II',
@@ -100,7 +100,7 @@ let topMovies = [
     	bio: 'Franicis Ford Coppola is an American film director, producer, and screenwriter. He is considered one of the major figures of the New Hollywood filmmaking movement of the 1960s and 1970s.',
     	birth: 'April 7, 1939 '
     },
-    imageURL:
+    imageURL: 'images/godfather2.jpg'
   },
   {
     title: 'Rush Hour',
@@ -114,7 +114,7 @@ let topMovies = [
     	bio: 'Brett Ratner is an American film director and producer. He directed the Rush Hour film series, The Family Man, Red Dragon, X-Men: The Last Stand, and Tower Heist. He is also a producer of several films, including the Horrible Bosses series, The Revenant and War Dogs.',
     	birth: ' March 28, 1969'
     },
-    imageURL:
+    imageURL: 'images/rush_hour.jpg'
   },
   {
     title: 'Juice',
@@ -128,7 +128,7 @@ let topMovies = [
     	bio: 'Ernest Roscoe Dickerson is an American director, cinematographer, and screenwriter of film, television, and music videos.',
     	birth: 'June 25, 1951'
     },
-    imageURL:
+    imageURL: 'images/juice.jpeg'
   },
   {
     title: 'Coming To America',
@@ -142,7 +142,7 @@ let topMovies = [
     	bio: 'John David Landis is an American filmmaker and actor. He is best known for the comedy films that he has directed such as The Kentucky Fried Movie, National Lampoons Animal House, The Blues Brothers, An American Werewolf in London, Trading Places, Three Amigos, Coming to America and Beverly Hills Cop III, and for directing Michael Jacksons music videos for Thriller and Black or White.',
     	birth: 'August 3, 1950'
     },
-    imageURL:
+    imageURL: 'images/coming_to_america.jpg'
   },
 ];
 
