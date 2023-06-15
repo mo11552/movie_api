@@ -3,6 +3,19 @@ const express = require('express');
 
 const app = express();
 
+let users = [
+	{
+		id: 1,
+		name: "Moyo",
+		favoriteMovies: []
+	},
+	{
+		id: 2,
+		name: "Chris"
+		favoriteMovies: ["The GodFather"]
+	},
+]
+
 let topMovies = [
   {
     title: 'Harry Potter and the Sorcerer\'s Stone',
@@ -180,10 +193,10 @@ app.get('/movies/director/:directorName', (req, res) => {
   const { directorName } = req.params;
   const director = topMovies.find( movie => movie.director.name === directorName ).director;
 
-  if (genre) {
-  	res.status(200).json(genre);
+  if (director) {
+  	res.status(200).json(director);
   } else {
-  	res.status(400).send("no such genre")
+  	res.status(400).send("no such director")
   }
 })
 
