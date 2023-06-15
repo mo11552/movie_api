@@ -164,9 +164,21 @@ app.get('/movies/:title', (req, res) => {
 })
 
 // READ
-app.get('/movies/:genreName', (req, res) => {
+app.get('/movies/genre/:genreName', (req, res) => {
   const { genreName } = req.params;
   const genre = topMovies.find( movie => movie.genre.name === genreName ).genre;
+
+  if (genre) {
+  	res.status(200).json(genre);
+  } else {
+  	res.status(400).send("no such genre")
+  }
+})
+
+// READ
+app.get('/movies/directors/:directorName', (req, res) => {
+  const { directorName } = req.params;
+  const director = topMovies.find( movie => movie.director.name === directorName ).director;
 
   if (genre) {
   	res.status(200).json(genre);
