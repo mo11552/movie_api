@@ -1,7 +1,10 @@
-const express = require('express');
-  morgan = require('morgan');
+const express = require('express'),
+  morgan = require('morgan'),
+  app = express(),
+  bodyParser = require('body-parser'),
+  uuid = require('uuid');
 
-const app = express();
+app.use(bodyParser.json());
 
 let users = [
 	{
@@ -11,7 +14,7 @@ let users = [
 	},
 	{
 		id: 2,
-		name: "Chris"
+		name: "Chris",
 		favoriteMovies: ["The GodFather"]
 	},
 ]
@@ -158,6 +161,19 @@ let topMovies = [
     imageURL: "images/coming_to_america.jpg"
   },
 ];
+
+// CREATE
+app.post('/users', (req, res) => {
+	const newUser = req.body;
+
+	if (newUser.name) {
+		newUser.id =uuid.v4();
+		users.push(newUser);
+		res.status(201).json(newUser)
+	} else {
+		res.status(400).send('users need names')
+	}
+})
 
 // READ
 app.get('/movies', (req, res) => {
