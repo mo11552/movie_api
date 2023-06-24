@@ -163,6 +163,8 @@ let topMovies = [
 ];
 
 // CREATE
+
+// POSTMAN
 app.post('/users', (req, res) => {
 	const newUser = req.body;
 
@@ -173,6 +175,12 @@ app.post('/users', (req, res) => {
 	} else {
 		res.status(400).send('users need names')
 	}
+})
+// Web browser
+app.get('/users', (req, res) => {
+
+res.status(200).json(users);
+
 })
 
 // READ
