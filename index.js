@@ -1,10 +1,23 @@
 const express = require('express'),
-  morgan = require('morgan'),
-  app = express(),
   bodyParser = require('body-parser'),
   uuid = require('uuid');
 
+const morgan = require('morgan');
+const app = express();  
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movies = Models.movie;
+const Users = Models.user;
+const Genres = Models.genre;
+const Directors = Models.director;
+
+mongoose.connect('mongodb://localhost:27017/myflix.json', { useNewUrlParser: true, useUnifiedTopology: true });
+
+
 app.use(bodyParser.json());
+
+app.use(morgan("common"));
 
 let users = [
 	{
@@ -33,8 +46,9 @@ let topMovies = [
     	birth:'September 10, 1958'
     },
     imageURL: "images/Harry_Potter.jpeg"
-  },
-  {
+  }
+  
+  var movie2 = {
     title: 'The GodFather',
     description: 'It is the first installment in The Godfather trilogy, chronicling the Corleone family under patriarch Vito Corleone from 1945 to 1955. It focuses on the transformation of his youngest son, Michael Corleone, from reluctant family outsider to ruthless mafia boss.',
     genre: {
@@ -47,8 +61,11 @@ let topMovies = [
     	birth: 'April 7, 1939 '
     },
     imageURL: "images/the_godfather.jpeg"
-  },
-  {
+  }
+
+  db.movies.insertOne(movie2)
+  
+  var movie3 = {
     title: 'Scarface',
     description: 'Loosely based on the 1929 novel of the same name and serving as a loose remake of the 1932 film, it tells the story of Cuban refugee Tony Montana, who arrives penniless in Miami during the Mariel boatlift and becomes a powerful drug lord.',
     genre: {
@@ -61,8 +78,11 @@ let topMovies = [
     	birth: 'September 11, 1940'
     },
     imageURL: "images/scarface.jpeg"
-  },
-  {
+  }
+  
+  db.movies.insertOne(movie3)
+
+  var movie4 ={
     title: 'GoodFellas',
     description: 'The lowly, blue-collar side of the New York Italian mafia is explored in this crime biopic of wiseguy Henry Hill. As he makes his way from strapping young petty criminal, to big-time thief, to middle aged cocaine addict and dealer, the film explores in detail the rules and traditions of organized crime.',
     genre: {
@@ -75,8 +95,11 @@ let topMovies = [
     	birth: 'November 17, 1942'
     },
     imageURL: "images/goodfellas.jpg"
-  },
-  {
+  }
+
+  db.movies.insertOne(movie4)
+
+  var movie5 = {
     title: 'Training Day',
     description: 'A rookie cop spends his first day as a Los Angeles narcotics officer with a rogue detective who is not what he appears to be. He is just got one day to prove himself and he is a little anxious. He should be. Today is going to be the toughest of his life.',
     genre: {
@@ -89,8 +112,11 @@ let topMovies = [
     	birth: 'May 30, 1965'
     },
     imageURL: "images/training_day.jpg"
-  },
-  {
+  }
+
+  db.movies.insertOne(movie5)
+  
+  var movie6 = {
     title: 'The Wood',
     description: 'While dealing with a friends cold feet on his wedding day, a writer reminisces about his youth with his best friends. While dealing with a friends cold feet on his wedding day, a writer reminisces about his youth with his best friends.',
     genre: {
@@ -103,8 +129,10 @@ let topMovies = [
     	birth: 'June 18, 1973'
     },
     imageURL: "images/the_wood.jpeg"
-  },
-  {
+  }
+  db.movies.insertOne(movie6)
+
+  var movie7 = {
     title: 'The GodFather II',
     description: 'The Godfather: Part II juxtaposes two stories: that of Michael Corleone in the years after he becomes head of the Corleone family business and that of his father, Vito Corleone, as a young man.',
     genre: {
@@ -117,8 +145,11 @@ let topMovies = [
     	birth: 'April 7, 1939 '
     },
     imageURL: "images/godfather2.jpg"
-  },
-  {
+  }
+
+  db.movies.insertOne(movie7)
+
+  var movie8 = {
     title: 'Rush Hour',
     description: 'A loyal and dedicated Hong Kong Inspector teams up with a reckless and loudmouthed L.A.P.D. detective to rescue the Chinese Consuls kidnapped daughter, while trying to arrest a dangerous crime lord along the way.',
     genre: {
@@ -131,8 +162,11 @@ let topMovies = [
     	birth: ' March 28, 1969'
     },
     imageURL: "images/rush_hour.jpg"
-  },
-  {
+  }
+
+  db.movies.insertOne(movie8)
+
+  var movie9 = {
     title: 'Juice',
     description: 'The film touches on the lives of four black youths growing up in Harlem, following their day-to-day activities, their struggles with police harassment, rival neighborhood gangs and their families.', 
     genre: {
@@ -145,8 +179,11 @@ let topMovies = [
     	birth: 'June 25, 1951'
     },
     imageURL: "images/juice.jpeg"
-  },
-  {
+  }
+
+  db.movies.insertOne(movie9)
+  
+  var movie10 ={
     title: 'Coming To America',
     description: 'An extremely pampered African prince travels to Queens, New York and goes undercover to find a wife that he can respect for her intelligence and strong will. A noble, adventurous prince and his valet agree to find love in the Big Apple against his fathers wishes.',
     genre: {
@@ -159,21 +196,34 @@ let topMovies = [
     	birth: 'August 3, 1950'
     },
     imageURL: "images/coming_to_america.jpg"
-  },
+  }
+
+  db.movies.insertOne(movie10)
 ];
 
 // CREATE
 app.post('/users', (req, res) => {
-	const newUser = req.body;
-
-	if (newUser.name) {
-		newUser.id =uuid.v4();
-		users.push(newUser);
-		res.status(201).json(newUser)
-	} else {
-		res.status(400).send('users need names')
+	users.findOne({username: req.body.username })
+    .then({user} => 
+	   if (user) {
+		  return res.status(400).send(req.body.username + "already exists")
+     } else {
+		users.create({
+		  username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+      birthday: req.body.birthday,
+	  })
+      .then({user} => {
+        res.status(201).json(user);
+      })
+      .catch({error} => {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      });
 	}
 })
+.
 
 // UPDATE
 app.put('/users/:id', (req, res) => {
@@ -219,9 +269,20 @@ app.delete('/users/:id/:movieTitle', (req, res) => {
 })
 
 // DELETE
-app.delete('/users/:id/', (req, res) => {
-  const { id } = req.params;
- 
+app.delete('/users/:username', (req, res) => {
+  users.findOneAndRemove({ username: req.params.username })
+    .then({user} => {
+      if (!user) {
+        res.status(400).send(req.params.username + " was not found");
+      } else {
+        res.status(200).send(req.params.username + " was deleted");
+      }
+    })
+    .catch({err} => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+    
   let user =users.find( user => user.id == id );
 
   if (user) {
@@ -234,19 +295,40 @@ app.delete('/users/:id/', (req, res) => {
 
 // READ
 
-app.get('/users', (req, res) => {
+app.get('/', (req, res) => {
+  res.send("Welcome to myflix!");
 
-res.status(200).json(users);
-
-})
+});
 
 app.get('/movies', (req, res) => {
-  res.status(200).json(topMovies);
-})
+  movies.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+app.get('/users', function (req, res) {
+  users.find()
+    .then(function (users) {
+      res.status(201).json(users);
+    });
+});
 
 // READ
 app.get('/movies/:title', (req, res) => {
-  const { title } = req.params;
+  movies.findOne ({ title: req.params.title });
+    .then({movie} => {
+      res.json(movie);
+    })
+    .catch({err} => {
+      console.error(err);
+    });
+});
+
   const movie = topMovies.find( movie => movie.title === title);
 
   if (movie) {
@@ -254,23 +336,30 @@ app.get('/movies/:title', (req, res) => {
   } else {
   	res.status(400).send("no such movie")
   }
-})
 
 // READ
 app.get('/movies/genre/:genreName', (req, res) => {
-  const { genreName } = req.params;
-  const genre = topMovies.find( movie => movie.genre.name === genreName ).genre;
-
-  if (genre) {
-  	res.status(200).json(genre);
-  } else {
-  	res.status(400).send("no such genre")
-  }
-})
+  genres.findOne({ name: req.params.name })
+    .then({genre} => {
+      res.json(genre.description);
+  })
+  .catch({err} =>
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 
 // READ
-app.get('/movies/director/:directorName', (req, res) => {
-  const { directorName } = req.params;
+app.get('director/:name', (req, res) => {
+  director.findOne({ name: req.params.name })
+    .then({director} => {
+      res.json(director);
+    })
+    .catch({err} => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+  });
+
   const director = topMovies.find( movie => movie.director.name === directorName ).director;
 
   if (director) {
