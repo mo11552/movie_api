@@ -12,7 +12,7 @@ const Users = Models.User;
 const Genres = Models.Genres;
 const Directors = Models.Directors;
 
-mongoose.connect('mongodb://localhost:27017/myflix.json', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/myFlix', { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 app.use(bodyParser.json());
@@ -23,15 +23,15 @@ app.use(morgan("common"));
 // CREATE
 app.post('/users', (req, res) => {
 	Users.findOne({username: req.body.username })
-    .then((user) => 
+    .then((user) => { 
 	   if (user) {
 		  return res.status(400).send(req.body.username + "already exists")
      } else {
-		users.create({
-		  username: req.body.username,
-      password: req.body.password,
-      email: req.body.email,
-      birthday: req.body.birthday,
+		Users.create({
+		  Username: req.body.username,
+      Password: req.body.password,
+      Email: req.body.email,
+      Birthday: req.body.birthday,
 	  })
       .then((user) => {
         res.status(201).json(user);
@@ -42,14 +42,14 @@ app.post('/users', (req, res) => {
       });
 	}
 })
-.
+})
 
 // UPDATE
 app.put('/users/:id', (req, res) => {
   const { id } = req.params;
   const updatedUser = req.body;
 
-  let user =users.find( user => user.id == id );
+  let user =Users.find( user => User.id == id );
 
   if (user) {
     user.name = updatedUser.name;
@@ -63,7 +63,7 @@ app.put('/users/:id', (req, res) => {
 app.post('/users/:id/:movieTitle', (req, res) => {
   const { id, movieTitle } = req.params;
  
-  let user =users.find( user => user.id == id );
+  let user =Users.find( user => User.id == id );
 
   if (user) {
     user.favoriteMovies.push(movieTitle);
@@ -77,7 +77,7 @@ app.post('/users/:id/:movieTitle', (req, res) => {
 app.delete('/users/:id/:movieTitle', (req, res) => {
   const { id, movieTitle } = req.params;
  
-  let user =users.find( user => user.id == id );
+  let user =Users.find( user => user.id == id );
 
   if (user) {
     user.favoriteMovies = user.favoriteMovies.filter(title => title !== movieTitle);
@@ -88,7 +88,7 @@ app.delete('/users/:id/:movieTitle', (req, res) => {
 })
 
 // DELETE
-app.delete('/users/:username', (req, res) => {
+app.delete('/Users/:username', (req, res) => {
   Users.findOneAndRemove({ username: req.params.username })
     .then((user) => {
       if (!user) {
@@ -102,10 +102,10 @@ app.delete('/users/:username', (req, res) => {
       res.status(500).send("Error: " + err);
     });
 
-  let user =users.find( user => user.id == id );
+  let user =Users.find( user => User.id == id );
 
   if (user) {
-    users = users.filter(user => user.id != id);
+    users = Users.filter(user => User.id != id);
     res.status(200).send(`user ${id} has been deleted`);  
   } else {
       res.status(400).send('no such user')
@@ -120,7 +120,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-  movies.find()
+  Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
     })
@@ -131,7 +131,7 @@ app.get('/movies', (req, res) => {
 });
 
 app.get('/users', function (req, res) {
-  users.find()
+  Users.find()
     .then(function (users) {
       res.status(201).json(users);
     });
@@ -158,7 +158,7 @@ app.get('/movies/:title', (req, res) => {
 
 // READ
 app.get('/movies/genre/:genreName', (req, res) => {
-  genres.findOne({ name: req.params.name })
+  Genres.findOne({ name: req.params.name })
     .then((genre) => {
       res.json(genre.description);
   })
@@ -186,7 +186,6 @@ app.get('director/:name', (req, res) => {
   } else {
   	res.status(400).send("no such director")
   }
-})
 
 // READ
 app.get('/movies/director/:directorImage', (req, res) => {
