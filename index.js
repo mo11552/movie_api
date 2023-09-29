@@ -139,7 +139,7 @@ app.get('/users', function (req, res) {
 
 // READ
 app.get('/movies/:title', (req, res) => {
-  movies.findOne ({ title: req.params.title });
+  movies.findOne ({ title: req.params.title })
     .then((movie) => {
       res.json(movie);
     })
@@ -148,21 +148,13 @@ app.get('/movies/:title', (req, res) => {
     });
 });
 
-  const movie = topMovies.find( movie => movie.title === title);
-
-  if (movie) {
-  	res.status(200).json(movie);
-  } else {
-  	res.status(400).send("no such movie")
-  }
-
 // READ
 app.get('/movies/genre/:genreName', (req, res) => {
   Genres.findOne({ name: req.params.name })
     .then((genre) => {
       res.json(genre.description);
   })
-  .catch((err) =>
+  .catch((err) => {
     console.error(err);
     res.status(500).send("Error: " + err);
   });
@@ -178,14 +170,6 @@ app.get('director/:name', (req, res) => {
       res.status(500).send("Error: " + err);
     });
   });
-
-  const director = topMovies.find( movie => movie.director.name === directorName ).director;
-
-  if (director) {
-  	res.status(200).json(director);
-  } else {
-  	res.status(400).send("no such director")
-  }
 
 // READ
 app.get('/movies/director/:directorImage', (req, res) => {
