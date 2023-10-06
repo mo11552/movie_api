@@ -158,6 +158,7 @@ app.get('/movies/genre/:genreName', (req, res) => {
     console.error(err);
     res.status(500).send("Error: " + err);
   });
+})
 
 // READ
 app.get('director/:name', (req, res) => {
