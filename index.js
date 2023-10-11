@@ -12,7 +12,7 @@ const Users = Models.User;
 const Genres = Models.Genres;
 const Directors = Models.Directors;
 
-mongoose.connect('mongodb://localhost:27017/cfDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/cfDB', { useNewUrlParser: true, useUnifiedTopology: true }).then((done) => console.log("Connected to mongo")).catch((e) => console.log("Error connecting", e.name));
 
 
 app.use(bodyParser.json());
