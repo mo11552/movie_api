@@ -88,28 +88,19 @@ app.delete('/users/:id/:movieTitle', (req, res) => {
 })
 
 // DELETE
-app.delete('/Users/:username', (req, res) => {
-  Users.findOneAndRemove({ username: req.params.username })
+app.delete('/Users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
-        res.status(400).send(req.params.username + " was not found");
+        res.status(400).send(req.params.Username + " was not found");
       } else {
-        res.status(200).send(req.params.username + " was deleted");
+        res.status(200).send(req.params.Username + " was deleted");
       }
     })
     .catch((err) => {
       console.error(err);
       res.status(500).send("Error: " + err);
     });
-
-  let user =Users.find( user => User.id == id );
-
-  if (user) {
-    users = Users.filter(user => User.id != id);
-    res.status(200).send(`user ${id} has been deleted`);  
-  } else {
-      res.status(400).send('no such user')
-  }
 })
 
 // READ
@@ -139,7 +130,7 @@ app.get('/users', function (req, res) {
 
 // READ
 app.get('/movies/:title', (req, res) => {
-  movies.findOne ({ title: req.params.title })
+  Movies.findOne ({ title: req.params.title })
     .then((movie) => {
       res.json(movie);
     })
