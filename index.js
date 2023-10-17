@@ -150,6 +150,17 @@ app.get('/movies/genre/:genreName', (req, res) => {
     res.status(500).send("Error: " + err);
   });
 })
+// READ
+app.get("/movies/genre/:genreName", (req, res) => {
+  Movies.findOne({ "Genre.Name": req.params.genreName })
+    .then((genre) => {
+      res.json(genre);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
 
 // READ
 app.get('director/:name', (req, res) => {
