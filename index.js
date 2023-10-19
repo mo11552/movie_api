@@ -140,18 +140,6 @@ app.get('/movies/:title', (req, res) => {
 });
 
 // READ
-app.get('/movies/genre/:genreName', (req, res) => {
-  Genres.findOne({ name: req.params.genreName })
-    .then((genre) => {
-      res.json(genre.description);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send("Error: " + err);
-  });
-})
-
-// READ
 app.get("/movies/genre/:genreName", (req, res) => {
   Movies.findOne({ "Genre.Name": req.params.genreName })
     .then((genre) => {
