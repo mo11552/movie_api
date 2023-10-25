@@ -22,16 +22,16 @@ app.use(morgan("common"));
 
 // CREATE
 app.post('/users', (req, res) => {
-	Users.findOne({username: req.body.username })
+	Users.findOne({Username: req.body.Username })
     .then((user) => { 
 	   if (user) {
 		  return res.status(400).send(req.body.username + "already exists")
      } else {
 		Users.create({
-		  Username: req.body.username,
-      Password: req.body.password,
-      Email: req.body.email,
-      Birthday: req.body.birthday,
+		  Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday,
 	  })
       .then((user) => {
         res.status(201).json(user);
