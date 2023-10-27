@@ -152,8 +152,8 @@ app.get("/movies/genre/:genreName", (req, res) => {
 });
 
 // READ
-app.get("/director/:name", (req, res) => {
-  Movies.findOne({ 'Director.Name': req.params.name })
+app.get("/movies/director/:directorName", (req, res) => {
+  Movies.findOne({ "Director.Name": req.params.directorName })
     .then((director) => {
       res.json(director);
     })
@@ -161,7 +161,7 @@ app.get("/director/:name", (req, res) => {
       console.error(err);
       res.status(500).send("Error: " + err);
     });
-  });
+});
 
 // READ
 app.get('/movies/director/:directorImage', (req, res) => {
