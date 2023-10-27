@@ -152,8 +152,8 @@ app.get("/movies/genre/:genreName", (req, res) => {
 });
 
 // READ
-app.get("/movies/director/:directorName", (req, res) => {
-  Movies.findOne({ "Director.Name": req.params.directorName })
+app.get("/director/:name", (req, res) => {
+  Movies.findOne({ "Director.Name": req.params.name })
     .then((director) => {
       res.json(director);
     })
