@@ -12,8 +12,7 @@ const Users = Models.User;
 const Genres = Models.Genres;
 const Directors = Models.Directors;
 
-mongoose.connect('mongodb://localhost:27017/cfDB', { useNewUrlParser: true, useUnifiedTopology: true }).then((done) => console.log("Connected to mongo")).catch((e) => console.log("Error connecting", e.name));
-
+mongoose.connect('mongodb+srv://myFlixDbAdmin:tc7H5oL9fesiMQmC@myflixdb.a5vcyno.mongodb.net/?retryWrites=true&w=majority&appName=myFlixDB;', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
 
