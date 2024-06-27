@@ -12,7 +12,7 @@ const Users = Models.User;
 const Genres = Models.Genres;
 const Directors = Models.Directors;
 
-mongoose.connect('mongodb+srv://myFlixDbAdmin:tc7H5oL9fesiMQmC@myflixdb.a5vcyno.mongodb.net/?retryWrites=true&w=majority&appName=myFlixDB;', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
 
@@ -128,7 +128,7 @@ app.get('/', (req, res) => {
 
 });
 
-app.get('/movies', (req, res) => {
+app.get('/movies',passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
@@ -139,7 +139,7 @@ app.get('/movies', (req, res) => {
     });
 });
 
-app.get('/users', function (req, res) {
+app.get('/movies',passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.find()
     .then(function (users) {
       res.status(201).json(users);
@@ -165,7 +165,7 @@ app.get("/movies/genre/:genreName", (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error: " + err);
+      rhes.status(500).send("Error: " + err);
     });
 });
 
