@@ -39,7 +39,7 @@ require('./passport');
 
 
 // CREATE
-app.post('/users', (req, res) => {
+app.post('/users', passport.authenticate('jwt', { session: false}), (req, res) => {
 	Users.findOne({Username: req.body.Username })
     .then((user) => { 
 	   if (user) {
@@ -63,7 +63,7 @@ app.post('/users', (req, res) => {
 })
 
 // UPDATE
-app.put('/users/:id', (req, res) => {
+app.put('/users/:id', passport.authenticate('jwt', {session: false }), (req, res) => {
   const { id } = req.params;
   const updatedUser = req.body;
 
