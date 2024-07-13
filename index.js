@@ -34,8 +34,8 @@ app.use(cors({
 
 let auth = require('./auth')(app);
 
-const passport = require('passport');
-require('./passport');
+// const passport = require('passport');
+// require('./passport');
 
 
 // CREATE
