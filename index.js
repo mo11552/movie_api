@@ -12,7 +12,9 @@ const Users = Models.User;
 const Genres = Models.Genres;
 const Directors = Models.Directors;
 
-mongoose.connect( 'mongodb+srv://myFlixDbAdmin:HaXGVj7JyLKLwcTF@myflixdb.a5vcyno.mongodb.net/?retryWrites=true&w=majority&appName=myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// mongoose.connect( 'mongodb+srv://myFlixDbAdmin:HaXGVj7JyLKLwcTF@myflixdb.a5vcyno.mongodb.net/?retryWrites=true&w=majority&appName=myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
 
