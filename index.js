@@ -67,7 +67,7 @@ app.put('/users/:id', passport.authenticate('jwt', {session: false }), (req, res
   const { id } = req.params;
   const updatedUser = req.body;
 
-  let user =Users.find( user => User.id == id );
+  let user = await User.findOne({ _id: id });
 
   if (user) {
     user.name = updatedUser.name;
@@ -81,7 +81,7 @@ app.put('/users/:id', passport.authenticate('jwt', {session: false }), (req, res
 app.post('/users/:id/:movieTitle', (req, res) => {
   const { id, movieTitle } = req.params;
  
-  let user =Users.find( user => User.id == id );
+  let user = await User.findOne({ _id: id });
 
   if (user) {
     user.favoriteMovies.push(movieTitle);
@@ -92,10 +92,10 @@ app.post('/users/:id/:movieTitle', (req, res) => {
 })
 
 // DELETE
-app.delete('/users/:id/:movieTitle', (req, res) => {
+app.delete('/users/:id/:movieTitle', async (req, res) => {
   const { id, movieTitle } = req.params;
  
-  let user =Users.find( user => user.id == id );
+  let user = await User.findOne({ _id: id });
 
   if (user) {
     user.favoriteMovies = user.favoriteMovies.filter(title => title !== movieTitle);
