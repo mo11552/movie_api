@@ -12,7 +12,9 @@ const Users = Models.User;
 const Genres = Models.Genres;
 const Directors = Models.Directors;
 
-mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect( "mongodb://localhost:27017/cfDB", { useNewUrlParser: true, useUnifiedTopology: true });
+
+// mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // mongoose.connect( 'mongodb+srv://myFlixDbAdmin:HaXGVj7JyLKLwcTF@myflixdb.a5vcyno.mongodb.net/?retryWrites=true&w=majority&appName=myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -21,7 +23,6 @@ app.use(bodyParser.json());
 app.use(morgan("common"));
 
 const cors = require('cors');
-app.use(cors());
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -34,14 +35,14 @@ app.use(cors({
   }
 }));
 
-let auth = require('./auth')(app);
+// let auth = require('./auth')(app);
 
 // const passport = require('passport');
 // require('./passport');
 
 
 // CREATE
-app.post('/users', passport.authenticate('jwt', { session: false}), (req, res) => {
+app.post('/users', (req, res) => {
 	Users.findOne({Username: req.body.Username })
     .then((user) => { 
 	   if (user) {
@@ -65,7 +66,7 @@ app.post('/users', passport.authenticate('jwt', { session: false}), (req, res) =
 })
 
 // UPDATE
-app.put('/users/:id', passport.authenticate('jwt', {session: false }), (req, res) => {
+app.put('/users/:id', async (req, res) => {
   const { id } = req.params;
   const updatedUser = req.body;
 
@@ -80,7 +81,7 @@ app.put('/users/:id', passport.authenticate('jwt', {session: false }), (req, res
 })
 
 // POST
-app.post('/users/:id/:movieTitle', (req, res) => {
+app.post('/users/:id/:movieTitle', async (req, res) => {
   const { id, movieTitle } = req.params;
  
   let user = await User.findOne({ _id: id });
@@ -126,11 +127,13 @@ app.delete('/Users/:Username', (req, res) => {
 // READ
 
 app.get('/', (req, res) => {
-  res.send("Welcome to myflix!");
+  console.log('work?')
+  res.send("Welcome");
 
 });
 
-app.get('/movies',passport.authenticate('jwt', {session: false}), (req, res) => {
+app.get('/movies',(req, res) => {
+  console.log('Does this work?')
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
@@ -141,7 +144,7 @@ app.get('/movies',passport.authenticate('jwt', {session: false}), (req, res) => 
     });
 });
 
-app.get('/movies',passport.authenticate('jwt', {session: false}), (req, res) => {
+app.get('/movies',(req, res) => {
   Users.find()
     .then(function (users) {
       res.status(201).json(users);
@@ -254,7 +257,7 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.put('/users/:Username', async (req, res) => {
     // CONDITION TO CHECK ADDED HERE
     if(req.user.Username !== req.params.Username){
         return res.status(400).send('Permission denied');
