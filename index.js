@@ -35,10 +35,10 @@ app.use(cors({
   }
 }));
 
-// let auth = require('./auth')(app);
+ let auth = require('./auth')(app);
 
-// const passport = require('passport');
-// require('./passport');
+ const passport = require('passport');
+ require('./passport');
 
 
 // CREATE
@@ -132,7 +132,7 @@ app.get('/', (req, res) => {
 
 });
 
-app.get('/movies',(req, res) => {
+app.get('/movies', passport.authenticate('jwt',{ session: false }), async (req, res) => {
   console.log('Does this work?')
   Movies.find()
     .then((movies) => {
@@ -140,7 +140,7 @@ app.get('/movies',(req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error: " + err);
+      res.status(500).send("Error: " + error);
     });
 });
 

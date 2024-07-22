@@ -1,7 +1,7 @@
 const passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
   Models = require('./models.js'),
-  passportJwt = require('passport-jwt');
+  passportJWT = require('passport-jwt');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -9,8 +9,8 @@ dotenv.config()
 
 
 let Users = Models.User,
-  JWTStrategy = passportJwt.Strategy,
-  ExtractJWT = passportJwt.ExtractJwt;
+  JWTStrategy = passportJWT.Strategy,
+  ExtractJWT = passportJWT.ExtractJwt;
 
 passport.use(
   new LocalStrategy(
@@ -18,9 +18,9 @@ passport.use(
       usernameField: 'Username',
       passwordField: 'Password'
     },
-    async (Username, Password, callback) => {
-      console.log(`${Username} ${Password}`);
-      await Users.findOne({ Username: Username })
+    async (username, password, callback) => {
+      console.log(`${username} ${password}`);
+      await Users.findOne({ Username: username })
         .then((user) => {
           if (!user) {
             return callback(null, false, { message: 'Incorrect username' });
@@ -31,7 +31,7 @@ passport.use(
             return callback(null, user)
           }
         })
-        .catch((err) => {
+        .catch((error) => {
           return callback(err)
         });
     }));
@@ -39,12 +39,12 @@ passport.use(
 passport.use(new JWTStrategy(
   {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET_KEY 
+    secretOrKey: 'your_jwt_secret' 
   }, async (jwtPayload, callback) => {
     return await Users.findById(jwtPayload._id)
       .then((user) => {
         return callback(null, user)
-      }).catch((err) => {
-        return callback(err)
+      }).catch((error) => {
+        return callback(error)
       }); /* eslint no-undef: off */
   }));
