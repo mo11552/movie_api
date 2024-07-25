@@ -18,6 +18,8 @@ mongoose.connect( "mongodb://localhost:27017/cfDB", { useNewUrlParser: true, use
 
 // mongoose.connect( 'mongodb+srv://myFlixDbAdmin:HaXGVj7JyLKLwcTF@myflixdb.a5vcyno.mongodb.net/?retryWrites=true&w=majority&appName=myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
+// mongoimport --uri mongodb+srv://myFlixDbAdmin:p034KHbZyyfz6VYz@myflixdb.a5vcyno.mongodb.net/myFlixDB --collection movies --type json --file ../cfDB/movies.json
+
 app.use(bodyParser.json());
 
 app.use(morgan("common"));
