@@ -20,6 +20,10 @@ mongoose.connect( "mongodb://localhost:27017/cfDB", { useNewUrlParser: true, use
 
 // mongoimport --uri mongodb+srv://myFlixDbAdmin:p034KHbZyyfz6VYz@myflixdb.a5vcyno.mongodb.net/myFlixDB --collection movies --type json --file ../cfDB/movies.json
 
+// mongo "mongodb://ac-5jwdoc9-shard-00-00.a5vcyno.mongodb.net:27017,ac-5jwdoc9-shard-00-01.a5vcyno.mongodb.net:27017,ac-5jwdoc9-shard-00-02.a5vcyno.mongodb.net:27017/?replicaSet=atlas-2sjqb8-shard-0" --ssl --authenticationDatabase admin --username myFlixDbAdmin --password <p034KHbZyyfz6VYz>
+
+// mongo "mongodb://ac-5jwdoc9-shard-00-00.a5vcyno.mongodb.net:27017,ac-5jwdoc9-shard-00-01.a5vcyno.mongodb.net:27017,ac-5jwdoc9-shard-00-02.a5vcyno.mongodb.net:27017/?replicaSet=atlas-2sjqb8-shard-0" --ssl --authenticationDatabase admin --username myFlixDbAdmin --password p034KHbZyyfz6VYz
+
 app.use(bodyParser.json());
 
 app.use(morgan("common"));
