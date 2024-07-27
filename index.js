@@ -12,17 +12,16 @@ const Users = Models.User;
 const Genres = Models.Genres;
 const Directors = Models.Directors;
 
-mongoose.connect( "mongodb://localhost:27017/cfDB", { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect( "mongodb://localhost:27017/cfDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
-// mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+ mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// mongoose.connect( 'mongodb+srv://myFlixDbAdmin:HaXGVj7JyLKLwcTF@myflixdb.a5vcyno.mongodb.net/?retryWrites=true&w=majority&appName=myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect( 'mongodb+srv://myFlixDbAdmin:CYa2WRH5zFT42yC9@myflixdb.a5vcyno.mongodb.net/?retryWrites=true&w=majority&appName=myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
-// mongoimport --uri mongodb+srv://myFlixDbAdmin:p034KHbZyyfz6VYz@myflixdb.a5vcyno.mongodb.net/myFlixDB --collection movies --type json --file ../cfDB/movies.json
 
-// mongo "mongodb://ac-5jwdoc9-shard-00-00.a5vcyno.mongodb.net:27017,ac-5jwdoc9-shard-00-01.a5vcyno.mongodb.net:27017,ac-5jwdoc9-shard-00-02.a5vcyno.mongodb.net:27017/?replicaSet=atlas-2sjqb8-shard-0" --ssl --authenticationDatabase admin --username myFlixDbAdmin --password <p034KHbZyyfz6VYz>
+// "mongodb://ac-5jwdoc9-shard-00-00.a5vcyno.mongodb.net:27017,ac-5jwdoc9-shard-00-01.a5vcyno.mongodb.net:27017,ac-5jwdoc9-shard-00-02.a5vcyno.mongodb.net:27017/?replicaSet=atlas-2sjqb8-shard-0" --ssl --authenticationDatabase admin --username myFlixDbAdmin --password CYa2WRH5zFT42yC9
 
-// mongo "mongodb://ac-5jwdoc9-shard-00-00.a5vcyno.mongodb.net:27017,ac-5jwdoc9-shard-00-01.a5vcyno.mongodb.net:27017,ac-5jwdoc9-shard-00-02.a5vcyno.mongodb.net:27017/?replicaSet=atlas-2sjqb8-shard-0" --ssl --authenticationDatabase admin --username myFlixDbAdmin --password p034KHbZyyfz6VYz
+
 
 app.use(bodyParser.json());
 
