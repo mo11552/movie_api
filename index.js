@@ -132,7 +132,7 @@ app.get('/', (req, res) => {
 
 });
 
-app.get('/movies', passport.authenticate('jwt',{ session: false }), async (req, res) => {
+/*app.get('/movies', passport.authenticate('jwt',{ session: false }), async (req, res) => {
   console.log('Does this work?')
   Movies.find()
     .then((movies) => {
@@ -142,7 +142,7 @@ app.get('/movies', passport.authenticate('jwt',{ session: false }), async (req, 
       console.error(err);
       res.status(500).send("Error: " + error);
     });
-});
+});*/
 
 app.get('/movies',(req, res) => {
   Users.find()
