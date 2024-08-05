@@ -25,14 +25,17 @@ passport.use(
           if (!user) {
             return callback(null, false, { message: 'Incorrect username' });
           }
-          if (!user.validatePassword(Password)) {
+          if (!user.validatePassword(password)) {
             return callback(null, false, { message: 'Incorrect password' });
-          } else {
-            return callback(null, user)
-          }
+          } 
+          console.log('finished');
+          return callback(null, user);
         })
         .catch((error) => {
-          return callback(err)
+          if (error) {
+            console.log(error);
+          return callback(error);
+          }
         });
     }));
 
